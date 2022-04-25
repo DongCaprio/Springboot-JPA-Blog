@@ -15,10 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HttpController {
 	
+	private static final String TAG = "HttpController Test";
+	
+	@GetMapping("http/lombok")
+	public String lombokTest() {
+		Member m = Member.builder().username("sar").password("1234").email("ssar@").build();
+		System.out.println(TAG+"getter : "+m.getId());
+		m.setId(5000);
+		System.out.println(TAG+"getter : "+m.getId());
+		return "lombok test완료";
+	}
+	
 	// 인터넷 브라우저 요청은 무조건 get요청밖에 할 수 없다
 	// http://localhost:8082/http/get (select)
 	@GetMapping("/http/get")
 	public String getTest(Member m) {
+		System.out.println(TAG+"getter : "+m.getId());
 		return "get요청 : "+m.getId()+", "+m.getUsername();//+ m.getId()+", "+m.getUsername();
 	}
 
