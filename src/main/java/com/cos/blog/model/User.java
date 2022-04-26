@@ -15,7 +15,7 @@ import org.hibernate.annotations.CreationTimestamp;
 //ORM -> Object를 테이블로 매핑해주는 기술 (JPA가 좋은이유!)
 @Entity //User 클래스가 자동으로 MySQL에 테이블이 생성이된다
 public class User {
-	 
+	  
 	@Id //Primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //프로젝트에서 연결된 DB의 넘버링 전략을 따라간다. 	//뭔뜻이나면 오라클이면 시퀀스, mysql이면  Auto_Increment를 따라간다는 뜻
 	private int id; //시퀀스
