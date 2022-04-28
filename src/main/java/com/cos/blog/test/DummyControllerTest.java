@@ -1,11 +1,20 @@
 package com.cos.blog.test;
 
+import java.util.List;
 import java.util.function.Supplier;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.model.RoleType;
@@ -18,6 +27,44 @@ public class DummyControllerTest {
 
 	@Autowired // 의존성 주입(DI)
 	private UserRepository userRepository;
+	
+	// save함수는 id를 전달하지 않으면 insert를 해주고
+	// save함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해주고
+	// save함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 한다. (update시에는 save메소드를 많이 안쓴다)
+	// email, password바꾸기
+	@Transactional //이거 넣으면 save함수 주석처리(이거 없으면 save있어야됌)
+	@PutMapping("/dummy/user/{id}") //요청주소가 같아도 밑에 get과 put은 알아서 구분이 된다 & put은 update이다
+	public User updateUser(@PathVariable int id, @RequestBody User requestUser) { //json데이터 받으려면 @RequestBody해줘야된다
+		System.out.println("id : "+id);																		//Json데이터요청 => 스프링부트(MessageConverter의 Jackson)가 JAVA Object로 변환해서 받아준다
+		System.out.println("password : "+requestUser.getPassword());
+		System.out.println("email : "+requestUser.getEmail());
+		
+		User user = userRepository.findById(id).orElseThrow(()->{
+			return new IllegalArgumentException("수정에 실패하였습니다");
+		});
+		user.setPassword(requestUser.getPassword());
+		user.setEmail(requestUser.getEmail());
+		//userRepository.save(user);
+		
+		//더티 체킹
+		return null;
+	}
+	
+	// http://localhost:8000/blog/dummy/user
+	@GetMapping("/dummy/users")
+	public List<User> list(){
+		//findall도 이미 만들어져있는 메소드임
+		return userRepository.findAll();
+	}
+	
+	//한 페이지당 2건의 데이터를 리턴받아 볼 예정 
+	//스프링부트는 이미 페이징을 할 수 있는 메소드가 구현되어 있다 @PageableDefault 페이징은 0부터 시작 (url에 ?page=0)
+	@GetMapping("/dummy/user")
+	public List<User> pageList(@PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+		Page<User> pagingUser = userRepository.findAll(pageable); //Page<User>를 리턴하면 페이지에 대한 정보값까지 다 알려줌
+		List<User> users = pagingUser.getContent(); //순수하게 List에 대한 정보만 얻고싶을때 이것을 리턴한다 
+		return users;
+	}
 	
 	//${id}주소로 파라미터를 전달 받을 수 있다
 	// http://localhost:8000/blog/dummy/user/3 이라고치면
