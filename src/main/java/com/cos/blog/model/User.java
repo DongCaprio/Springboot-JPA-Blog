@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,8 +37,11 @@ public class User {
 	@Column(nullable = false, length = 50)
 	private String email;
 	
-	@ColumnDefault("'user'") //잘보면 " " 안에 ' ' 있다 이걸 넣어줘야 한다(문자라는것을 알려주기위해)
-	private String role; //String보다 Enum을 쓰는게 좋다. //admin, user, manager 권한관리
+	//@ColumnDefault("'user'") //잘보면 " " 안에 ' ' 있다 이걸 넣어줘야 한다(문자라는것을 알려주기위해)
+	//근데위에 어노테이션 안쓰도록 함(enum으로 할것임)
+	//DB는 RoleType이라는 게 없다(즉 enum으로 하고 뭘 할건지 알려줘야한다 이번에는 String)
+	@Enumerated(EnumType.STRING)
+	private RoleType role; //String보다 Enum을 쓰는게 좋다. 타입을 강제하므로 enum으로 //admin, user, manager 권한관리
 	
 	@CreationTimestamp //시간이 자동입력
 	private Timestamp createDate;
