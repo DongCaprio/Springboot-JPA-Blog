@@ -47,7 +47,7 @@ public class DummyControllerTest {
 		//userRepository.save(user);
 		
 		//더티 체킹
-		return null;
+		return null; 
 	}
 	
 	// http://localhost:8000/blog/dummy/user
