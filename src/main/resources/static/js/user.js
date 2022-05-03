@@ -30,7 +30,7 @@ let index = {
 			location.href="/blog";
 		}).fail(function(error){
 			//실패시
-			alert(JSON.stringify(error));
+			alert(JSON.stringify(error)); 
 		}); 
 	}
 }
