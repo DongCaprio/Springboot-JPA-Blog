@@ -31,10 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/","/auth/**","/js/**","/css/**","/image/**")
 				.permitAll() //위에경로만 허용한다
 				.anyRequest() //위에것이 아닌 다른 모든 요청은
-				.authenticated()
+				.authenticated() //인증된 사용자의 접근을 허용
 			.and()
 				.formLogin()
 				.loginPage("/auth/loginForm")
-				; //인증이 필요하다
+				;
 	}
 }
