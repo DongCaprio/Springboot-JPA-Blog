@@ -26,6 +26,6 @@
 </div>
 
 <!-- /하면 static폴더를 바로찾아감(스프링부트?)  -->
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>
 
