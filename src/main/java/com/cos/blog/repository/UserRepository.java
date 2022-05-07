@@ -1,5 +1,7 @@
 package com.cos.blog.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,6 +14,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	//jparepository는 user를 관리하는 repository이다 
 	//그리고 user테이블의 primary key는 integer야! 라는 뜻이다 (뒤에 꺽쇠)
 	
+	// SELECT * FROM user WHERE username = 1?;
+	// 네이밍규칙으로 인해 위의 쿼리가 들어감
+	Optional<User> findByUsername(String username);
 	
 	
 }
