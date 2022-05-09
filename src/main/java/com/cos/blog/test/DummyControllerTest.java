@@ -77,10 +77,10 @@ public class DummyControllerTest {
 	//한 페이지당 2건의 데이터를 리턴받아 볼 예정 
 	//스프링부트는 이미 페이징을 할 수 있는 메소드가 구현되어 있다 @PageableDefault 페이징은 0부터 시작 (url에 ?page=0)
 	@GetMapping("/dummy/user")
-	public List<User> pageList(@PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+	public Page<User> pageList(@PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
 		Page<User> pagingUser = userRepository.findAll(pageable); //Page<User>를 리턴하면 페이지에 대한 정보값까지 다 알려줌
 		List<User> users = pagingUser.getContent(); //순수하게 List에 대한 정보만 얻고싶을때 이것을 리턴한다 
-		return users;
+		return pagingUser;
 	}
 	
 	//${id}주소로 파라미터를 전달 받을 수 있다
