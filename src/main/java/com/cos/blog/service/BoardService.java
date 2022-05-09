@@ -14,13 +14,13 @@ import com.cos.blog.repository.BoardRepository;
 public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
-	
+
+	@Transactional(readOnly = true)
 	public Board 글상세보기(int id) {
-		return boardRepository.findById(id)
-				.orElseThrow(()->{
-					return new IllegalArgumentException("글 상세보기 실패 : 아이드를 찾을 수 없습니다");
-				});
-		
+		return boardRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("글 상세보기 실패 : 아이드를 찾을 수 없습니다");
+		});
+
 	}
 
 	@Transactional
@@ -29,10 +29,18 @@ public class BoardService {
 		board.setUser(user);
 		boardRepository.save(board);
 	}
-	
-	//page를 반환해야 첫번쨰 페이지 마지막 페이지 등등
-	//페이지에 대한 정보를 얻을 수 있기 때문에 마지막페이지에 대한 정보를 받는다.
-	public Page<Board> 글목록(Pageable pageable){
+
+	// page를 반환해야 첫번쨰 페이지 마지막 페이지 등등
+	// 페이지에 대한 정보를 얻을 수 있기 때문에 마지막페이지에 대한 정보를 받는다.
+	@Transactional(readOnly = true)
+	public Page<Board> 글목록(Pageable pageable) {
 		return boardRepository.findAll(pageable);
 	}
+
+	@Transactional
+	public void 글삭제하기(int id) {
+		System.out.println("글삭제하기"+id);
+		boardRepository.deleteById(id);
+	}
+
 }
