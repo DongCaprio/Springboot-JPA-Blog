@@ -22,7 +22,7 @@ public class PrincipalDetailService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		User principal = userRepository.findByUsername(username)
-				.orElseThrow(()->{
+				.orElseThrow(()->{ 
 					return new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다."+username);
 				});
 		return new PrincipalDetail(principal); //시큐리티의 세션에 유저 저옵가 저장이 됨
