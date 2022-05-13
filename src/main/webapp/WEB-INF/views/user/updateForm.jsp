@@ -3,9 +3,9 @@
 
 <div class="container">
 
-	<form action="/user/join" method="post">
-	<input type="hidden" id="id" value="${principal.user.id }">
+	<form>
 		<div class="form-group">
+			<input type="hidden" id="id" value="${principal.user.id }" />
 			<label for="username">Username</label>
 			<input type="text" value="${principal.user.username }" class="form-control" placeholder="Enter username" id="username" readonly="readonly">
 		</div>
@@ -19,9 +19,7 @@
 			<label for="email">Email</label>
 			<input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" id="email">
 		</div>
-
-
-		<button id="btn-update" class="btn btn-primary">정보수정 완료</button>
+		<button id="btn-update" class="btn btn-primary">회원수정 완료</button>
 	</form>
 
 </div>
