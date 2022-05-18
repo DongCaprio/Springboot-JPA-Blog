@@ -3,7 +3,8 @@
 
 <div class="container">
 
-	<form action="/auth/loginProc" method="post"> <!--실제 저 action주소는 없다. 스프링이 가로채도록 SecurityConfig.java에 설정해준다  -->
+	<form action="/auth/loginProc" method="post">
+		<!--실제 저 action주소는 없다. 스프링이 가로채도록 SecurityConfig.java에 설정해준다  -->
 		<div class="form-group">
 			<label for="username">Username</label>
 			<input type="text" name="username" class="form-control" placeholder="Enter username" id="username">
@@ -13,6 +14,8 @@
 			<input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
 		</div>
 		<button id="btn-login" class="btn btn-primary">로그인</button>
+		<a href='https://kauth.kakao.com/oauth/authorize?client_id=de03bf0026bc4873c9fa0c615a4240f5&redirect_uri=http://localhost:8000/auth/kakao/callback&response_type=code'>
+		<img height="38px" src="/image/kakao_login_button.png"></a>
 	</form>
 </div>
 
