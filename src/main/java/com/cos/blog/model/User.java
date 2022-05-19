@@ -30,7 +30,7 @@ public class User {
 	@Id //Primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //프로젝트에서 연결된 DB의 넘버링 전략을 따라간다. 	//뭔뜻이나면 오라클이면 시퀀스, mysql이면  Auto_Increment를 따라간다는 뜻
 	private int id; //시퀀스
-	@Column(nullable = false, length = 30) //null이 될수있고 최대 30글자
+	@Column(nullable = false, length = 100) //null이 될수있고 최대 30글자
 	private String username;
 	@Column(nullable = false, length = 100) //비밀번호를 해쉬암호화하므로 넉넉하게 준다
 	private String password;

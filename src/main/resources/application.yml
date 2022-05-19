@@ -22,14 +22,17 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update #create는 테이블을 새로 만들겠다는것(최초시에만 create라고 함, 이미 테이블있으면 데이터다날아가고 새로운 테이블생성됨 주의*) 2번째부터는 update라고하자
+      ddl-auto:  update #create는 테이블을 새로 만들겠다는것(최초시에만 create라고 함, 이미 테이블있으면 데이터다날아가고 새로운 테이블생성됨 주의*) 2번째부터는 update라고하자
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #DB생성시에 변수명 그대로 테이블을 만들어줌
       use-new-id-generator-mappings: false #jsp의 기본 넘버링 전략을 따라가지 않겠다
-    show-sql: true #로그에 테이블 create정보 보여주기
+   # show-sql: true #로그에 테이블 create정보 보여주기
     properties:
       hibernate.format_sql: true #로그 정렬용
 
   jackson:
     serialization:
       fail-on-empty-beans: false
+      
+cos:
+  key: cos1234
