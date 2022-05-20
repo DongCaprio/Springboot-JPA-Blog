@@ -48,7 +48,7 @@ public class UserController {
 
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {
-		return "/";
+		return "user/joinForm";
 	}
 
 	@GetMapping("/auth/loginForm")
@@ -137,6 +137,7 @@ public class UserController {
 				.username(kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId())
 				.password(cosKey)
 				.email(kakaoProfile.getKakao_account().getEmail())
+				.oauth("kakao")
 				.build();
 		
 		//가입자 혹은 비가입자 체크해서 처리
@@ -151,7 +152,6 @@ public class UserController {
 		//로그인처리
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(), cosKey));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		System.out.println("-------------------나는 모르");
 		return "redirect:/";
 	}
 
