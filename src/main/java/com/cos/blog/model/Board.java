@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -54,6 +54,7 @@ public class Board {
 	//mappedBy 연관관계의 주인이 아니다(난 FK가 아니에요) DB에 컬럼을 만들지 마세요 //mappedBy에서 board는 Reply.java의 필드값을 적어주면된다.(name값아님! 자바필드값 board)
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"board"}) //jpa무한참조방지
+	@OrderBy("id desc")
 	 private List<Reply> replys;
 	  
 	@CreationTimestamp //현재시간 자동으로 들어감
