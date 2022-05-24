@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,7 +53,8 @@ public class Board {
 	 // 어노테이션 joincolum필요없음!!!!! DB에서 하나의 칸안에는 하나의 값만 들어가야하므로
 	//mappedBy 연관관계의 주인이 아니다(난 FK가 아니에요) DB에 컬럼을 만들지 마세요 //mappedBy에서 board는 Reply.java의 필드값을 적어주면된다.(name값아님! 자바필드값 board)
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-	 private List<Reply> reply;
+	@JsonIgnoreProperties({"board"}) //jpa무한참조방지
+	 private List<Reply> replys;
 	  
 	@CreationTimestamp //현재시간 자동으로 들어감
 	private Timestamp createDate;
