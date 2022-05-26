@@ -38,7 +38,9 @@ public class BoardApiController {
 		boardService.글수정하기(id, board);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
-	
+
+	// 데이터 받을 때 컨트롤러에서 dto를 만들어서 받는게 좋다.
+	// dto를 사용하지 않은 이유는 지금 하는 프로젝트는 작기 때문(일반적인 프로젝트는 dto 생성함)
 	@PostMapping("/api/board/{boardId}/reply")
 	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
 		System.out.println(reply); //reply는 board.js에서 보내는 data

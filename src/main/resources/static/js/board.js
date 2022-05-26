@@ -75,6 +75,7 @@ let index = {
 			content: $("#reply-content").val()
 		};
 		let boardId = $("#boardId").val();
+		console.log(data);
 
 		$.ajax({
 			type: "POST",
