@@ -13,6 +13,6 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(value = Exception.class) // 이 괄호안이 있어야지 IllegalArgumentException 의 에러결과가 밑에줄의 e에 들어가게 된다 
 	public ResponseDto<String> handleArgumentException(IllegalArgumentException e) {
-		return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+		return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()); //500
 	}
 }
