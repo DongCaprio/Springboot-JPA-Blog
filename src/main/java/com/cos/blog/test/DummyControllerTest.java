@@ -121,7 +121,8 @@ public class DummyControllerTest {
 		System.out.println("createDate : "+user.getCreateDate());
 		
 		user.setRole(RoleType.USER); //enum을 넣어버림
-		userRepository.save(user);
+		userRepository.save(user); //insert시 save함수 사용!
+		//insert하려고 save할때는 @Transactional 안붙인다.
 		return "회원가입이 완료되었습니다";
 	}
 }

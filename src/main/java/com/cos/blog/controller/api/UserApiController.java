@@ -32,7 +32,7 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 자바오브젝트를 JSON으로 변환해서 리턴 (Jackson)
 	}
 
-	@PutMapping("/user")
+	@PutMapping("/api/user")
 	public ResponseDto<Integer> update(@RequestBody User user) { // key=value, x-www-form-urlencoded
 		userService.회원수정(user);
 		// 여기서는 트랜잭션이 종료되기 때문에 DB에 값은 변경이 됐음.
