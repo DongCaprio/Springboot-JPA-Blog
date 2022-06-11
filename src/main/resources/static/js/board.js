@@ -47,7 +47,7 @@ let index = {
 			alert(JSON.stringify(error));
 		});
 	},
-
+ 
 	update: function() {
 		let id = $("#id").val();
 
